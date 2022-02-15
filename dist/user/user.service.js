@@ -27,6 +27,9 @@ let UserService = class UserService {
     async create(data) {
         return this.userRepository.save(data);
     }
+    async findOne(condition) {
+        return this.userRepository.findOne(condition);
+    }
 };
 UserService = __decorate([
     (0, common_1.Injectable)(),
