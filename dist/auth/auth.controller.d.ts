@@ -9,4 +9,7 @@ export declare class AuthController {
     register(body: RegisterDto): Promise<import("../user/models/user.entity").User>;
     login(email: string, password: string, response: Response): Promise<import("../user/models/user.entity").User>;
     user(request: Request): Promise<import("../user/models/user.entity").User>;
+    logout(response: Response): Promise<{
+        message: string;
+    }>;
 }
