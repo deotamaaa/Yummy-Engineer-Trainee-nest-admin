@@ -17,9 +17,11 @@ const common_1 = require("@nestjs/common");
 const user_service_1 = require("../user/user.service");
 const bcrypt = require("bcryptjs");
 const register_dto_1 = require("./models/register.dto");
+const jwt_1 = require("@nestjs/jwt");
 let AuthController = class AuthController {
-    constructor(userService) {
+    constructor(userService, jwtService) {
         this.userService = userService;
+        this.jwtService = jwtService;
     }
     async register(body) {
         if (body.password !== body.password_confirm) {
@@ -33,7 +35,7 @@ let AuthController = class AuthController {
             password: hashed,
         });
     }
-    async login(email, password) {
+    async login(email, password, response) {
         const user = await this.userService.findOne({ email });
         if (!user) {
             throw new common_1.NotFoundException('User not found!');
@@ -41,6 +43,8 @@ let AuthController = class AuthController {
         if (!await bcrypt.compare(password, (await user).password)) {
             throw new common_1.BadRequestException('Invalid password!');
         }
+        const jwt = await this.jwtService.signAsync({ id: user.id });
+        response.cookie('jwt', jwt, { httpOnly: true });
         return user;
     }
 };
@@ -55,13 +59,15 @@ __decorate([
     (0, common_1.Post)('login'),
     __param(0, (0, common_1.Body)('email')),
     __param(1, (0, common_1.Body)('password')),
+    __param(2, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:paramtypes", [String, String, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
 AuthController = __decorate([
     (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [user_service_1.UserService])
+    __metadata("design:paramtypes", [user_service_1.UserService,
+        jwt_1.JwtService])
 ], AuthController);
 exports.AuthController = AuthController;
 //# sourceMappingURL=auth.controller.js.map
