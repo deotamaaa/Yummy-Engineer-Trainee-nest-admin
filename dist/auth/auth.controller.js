@@ -77,6 +77,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "user", null);
 AuthController = __decorate([
+    (0, common_1.UseInterceptors)(common_1.ClassSerializerInterceptor),
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [user_service_1.UserService,
         jwt_1.JwtService])
