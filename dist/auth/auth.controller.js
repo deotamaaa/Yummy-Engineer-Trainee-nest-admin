@@ -33,6 +33,16 @@ let AuthController = class AuthController {
             password: hashed,
         });
     }
+    async login(email, password) {
+        const user = await this.userService.findOne({ email });
+        if (!user) {
+            throw new common_1.NotFoundException('User not found!');
+        }
+        if (!await bcrypt.compare(password, (await user).password)) {
+            throw new common_1.BadRequestException('Invalid password!');
+        }
+        return user;
+    }
 };
 __decorate([
     (0, common_1.Post)('register'),
@@ -41,6 +51,14 @@ __decorate([
     __metadata("design:paramtypes", [register_dto_1.RegisterDto]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "register", null);
+__decorate([
+    (0, common_1.Post)('login'),
+    __param(0, (0, common_1.Body)('email')),
+    __param(1, (0, common_1.Body)('password')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "login", null);
 AuthController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [user_service_1.UserService])
