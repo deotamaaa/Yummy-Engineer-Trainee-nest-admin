@@ -18,6 +18,7 @@ const user_service_1 = require("../user/user.service");
 const bcrypt = require("bcryptjs");
 const register_dto_1 = require("./models/register.dto");
 const jwt_1 = require("@nestjs/jwt");
+const auth_guard_1 = require("./auth.guard");
 let AuthController = class AuthController {
     constructor(userService, jwtService) {
         this.userService = userService;
@@ -76,6 +77,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
 __decorate([
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Get)('user'),
     __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
@@ -83,6 +85,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "user", null);
 __decorate([
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Post)('logout'),
     __param(0, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
