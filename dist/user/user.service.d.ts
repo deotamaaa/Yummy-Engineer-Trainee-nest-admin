@@ -6,4 +6,6 @@ export declare class UserService {
     all(): Promise<User[]>;
     create(data: any): Promise<User>;
     findOne(condition: any): Promise<User>;
+    update(id: number, data: any): Promise<any>;
+    delete(id: number): Promise<any>;
 }
