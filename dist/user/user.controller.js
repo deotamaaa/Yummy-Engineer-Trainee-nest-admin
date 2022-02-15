@@ -18,6 +18,7 @@ const user_service_1 = require("./user.service");
 const bcrypt = require("bcryptjs");
 const user_create_dto_1 = require("./models/user-create.dto");
 const auth_guard_1 = require("../auth/auth.guard");
+const user_update_dto_1 = require("./models/user-update.dto");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
@@ -36,6 +37,13 @@ let UserController = class UserController {
     }
     async get(id) {
         return this.userService.findOne({ id });
+    }
+    async update(id, body) {
+        await this.userService.update(id, body);
+        return this.userService.findOne({ id });
+    }
+    async delete(id) {
+        return this.userService.delete(id);
     }
 };
 __decorate([
@@ -58,6 +66,21 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "get", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, user_update_dto_1.UserUpdateDto]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "update", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "delete", null);
 UserController = __decorate([
     (0, common_1.UseInterceptors)(common_1.ClassSerializerInterceptor),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),

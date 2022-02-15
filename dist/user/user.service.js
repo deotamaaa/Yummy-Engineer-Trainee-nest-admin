@@ -30,6 +30,12 @@ let UserService = class UserService {
     async findOne(condition) {
         return this.userRepository.findOne(condition);
     }
+    async update(id, data) {
+        return this.userRepository.update(id, data);
+    }
+    async delete(id) {
+        return this.userRepository.delete(id);
+    }
 };
 UserService = __decorate([
     (0, common_1.Injectable)(),
