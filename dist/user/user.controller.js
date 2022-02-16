@@ -23,8 +23,8 @@ let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
     }
-    async all() {
-        return await this.userService.all();
+    async all(page = 1) {
+        return await this.userService.paginate(page);
     }
     async create(body) {
         const password = await bcrypt.hash('1234', 12);
@@ -48,8 +48,9 @@ let UserController = class UserController {
 };
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)('page')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "all", null);
 __decorate([
