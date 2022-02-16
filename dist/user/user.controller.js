@@ -11,6 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
@@ -28,18 +39,15 @@ let UserController = class UserController {
     }
     async create(body) {
         const password = await bcrypt.hash('1234', 12);
-        return await this.userService.create({
-            firstName: body.firstName,
-            lastName: body.lastName,
-            email: body.email,
-            password
-        });
+        const { role_id } = body, data = __rest(body, ["role_id"]);
+        return await this.userService.create(Object.assign(Object.assign({}, data), { password, role: { id: role_id } }));
     }
     async get(id) {
         return this.userService.findOne({ id });
     }
     async update(id, body) {
-        await this.userService.update(id, body);
+        const { role_id } = body, data = __rest(body, ["role_id"]);
+        await this.userService.update(id, Object.assign(Object.assign({}, data), { role: { id: role_id } }));
         return this.userService.findOne({ id });
     }
     async delete(id) {

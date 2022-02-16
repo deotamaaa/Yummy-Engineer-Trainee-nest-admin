@@ -26,5 +26,9 @@ __decorate([
     (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
 ], UserCreateDto.prototype, "email", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Number)
+], UserCreateDto.prototype, "role_id", void 0);
 exports.UserCreateDto = UserCreateDto;
 //# sourceMappingURL=user-create.dto.js.map

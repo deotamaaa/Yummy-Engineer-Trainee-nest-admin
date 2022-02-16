@@ -29,11 +29,13 @@ let AuthController = class AuthController {
             throw new common_1.BadRequestException('Password do not match!');
         }
         const hashed = await bcrypt.hash(body.password, 12);
+        { }
         return this.userService.create({
             firstName: body.firstName,
             lastName: body.lastName,
             email: body.email,
             password: hashed,
+            role: { id: 1 }
         });
     }
     async login(email, password, response) {
