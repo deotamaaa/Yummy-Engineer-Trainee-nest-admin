@@ -28,7 +28,7 @@ let RoleService = class RoleService {
         return this.roleRepository.save(data);
     }
     async findOne(condition) {
-        return this.roleRepository.findOne(condition);
+        return this.roleRepository.findOne(condition, { relations: ['permissions'] });
     }
     async update(id, data) {
         return this.roleRepository.update(id, data);
