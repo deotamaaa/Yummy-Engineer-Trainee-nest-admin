@@ -5,6 +5,7 @@ import { RegisterDto } from './models/register.dto';
 import { JwtService } from '@nestjs/jwt';
 import { Response, Request } from 'express';
 import { AuthGuard } from './auth.guard';
+import { AuthService } from './auth.service';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller()
@@ -13,6 +14,7 @@ export class AuthController {
     constructor(
         private userService: UserService,
         private jwtService: JwtService,
+        private authService: AuthService,
     ) {
     }
 
@@ -63,19 +65,17 @@ export class AuthController {
     // Authenticate user and generate JWT
     @Get('user')
     async user(@Req() request: Request) {
-        const cookie = request.cookies['jwt'];
-
-        // Get data from the Cookie
-        const data = await this.jwtService.verifyAsync(cookie);
+        const id = await this.authService.userId(request);
 
         // Get user from the database
-        return this.userService.findOne({ id: data.id });
+        return this.userService.findOne({ id });
     }
 
     @UseGuards(AuthGuard) // Check if user is authenticated
     @Post('logout')
     async logout(@Res({ passthrough: true }) response: Response) {
         response.clearCookie('jwt');
+
         return {
             message: 'Logged out successfully',
         }

@@ -19,10 +19,12 @@ const bcrypt = require("bcryptjs");
 const register_dto_1 = require("./models/register.dto");
 const jwt_1 = require("@nestjs/jwt");
 const auth_guard_1 = require("./auth.guard");
+const auth_service_1 = require("./auth.service");
 let AuthController = class AuthController {
-    constructor(userService, jwtService) {
+    constructor(userService, jwtService, authService) {
         this.userService = userService;
         this.jwtService = jwtService;
+        this.authService = authService;
     }
     async register(body) {
         if (body.password !== body.password_confirm) {
@@ -51,9 +53,8 @@ let AuthController = class AuthController {
         return user;
     }
     async user(request) {
-        const cookie = request.cookies['jwt'];
-        const data = await this.jwtService.verifyAsync(cookie);
-        return this.userService.findOne({ id: data.id });
+        const id = await this.authService.userId(request);
+        return this.userService.findOne({ id });
     }
     async logout(response) {
         response.clearCookie('jwt');
@@ -98,7 +99,8 @@ AuthController = __decorate([
     (0, common_1.UseInterceptors)(common_1.ClassSerializerInterceptor),
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [user_service_1.UserService,
-        jwt_1.JwtService])
+        jwt_1.JwtService,
+        auth_service_1.AuthService])
 ], AuthController);
 exports.AuthController = AuthController;
 //# sourceMappingURL=auth.controller.js.map
