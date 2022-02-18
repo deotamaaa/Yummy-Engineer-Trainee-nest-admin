@@ -29,7 +29,7 @@ let RoleController = class RoleController {
         });
     }
     async get(id) {
-        return this.roleService.findOne({ id });
+        return this.roleService.findOne({ id }, ['permissions']);
     }
     async update(id, name, ids) {
         await this.roleService.update(id, {
