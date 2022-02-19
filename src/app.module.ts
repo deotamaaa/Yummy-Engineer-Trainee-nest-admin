@@ -8,6 +8,7 @@ import { CommonModule } from './common/common.module';
 import { RoleModule } from './role/role.module';
 import { PermissionModule } from './permission/permission.module';
 import { AbstractService } from './common/abstract.service';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { AbstractService } from './common/abstract.service';
     CommonModule,
     RoleModule,
     PermissionModule,
+    ProductModule,
   ],
   controllers: [AppController],
   providers: [AppService],
