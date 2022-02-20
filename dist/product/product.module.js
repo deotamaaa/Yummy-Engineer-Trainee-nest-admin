@@ -13,6 +13,7 @@ const common_module_1 = require("../common/common.module");
 const product_entity_1 = require("./models/product.entity");
 const product_controller_1 = require("./product.controller");
 const product_service_1 = require("./product.service");
+const upload_controller_1 = require("./upload.controller");
 let ProductModule = class ProductModule {
 };
 ProductModule = __decorate([
@@ -21,7 +22,7 @@ ProductModule = __decorate([
             typeorm_1.TypeOrmModule.forFeature([product_entity_1.Product]),
             common_module_1.CommonModule
         ],
-        controllers: [product_controller_1.ProductController],
+        controllers: [product_controller_1.ProductController, upload_controller_1.UploadController],
         providers: [product_service_1.ProductService]
     })
 ], ProductModule);
