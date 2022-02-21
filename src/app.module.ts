@@ -7,8 +7,9 @@ import { AuthModule } from './auth/auth.module';
 import { CommonModule } from './common/common.module';
 import { RoleModule } from './role/role.module';
 import { PermissionModule } from './permission/permission.module';
-import { AbstractService } from './common/abstract.service';
 import { ProductModule } from './product/product.module';
+import { APP_GUARD } from '@nestjs/core';
+import { PermissionGuard } from './permission/permission.guard';
 import { OrderModule } from './order/order.module';
 
 @Module({
@@ -32,6 +33,9 @@ import { OrderModule } from './order/order.module';
     OrderModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, {
+    provide: APP_GUARD,
+    useClass: PermissionGuard,
+  }],
 })
 export class AppModule { }
