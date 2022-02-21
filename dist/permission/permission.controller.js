@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PermissionController = void 0;
 const common_1 = require("@nestjs/common");
-const has_permission_decorator_1 = require("./has-permission.decorator");
+const auth_guard_1 = require("../auth/auth.guard");
 const permission_service_1 = require("./permission.service");
 let PermissionController = class PermissionController {
     constructor(permissionService) {
@@ -23,12 +23,12 @@ let PermissionController = class PermissionController {
 };
 __decorate([
     (0, common_1.Get)(),
-    (0, has_permission_decorator_1.HasPermission)('view_permissions'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], PermissionController.prototype, "all", null);
 PermissionController = __decorate([
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Controller)('permission'),
     __metadata("design:paramtypes", [permission_service_1.PermissionService])
 ], PermissionController);

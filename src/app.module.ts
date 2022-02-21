@@ -11,6 +11,7 @@ import { ProductModule } from './product/product.module';
 import { APP_GUARD } from '@nestjs/core';
 import { PermissionGuard } from './permission/permission.guard';
 import { OrderModule } from './order/order.module';
+import { RoleService } from './role/role.service';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { OrderModule } from './order/order.module';
     PermissionModule,
     ProductModule,
     OrderModule,
+    RoleService
   ],
   controllers: [AppController],
   providers: [AppService, {
