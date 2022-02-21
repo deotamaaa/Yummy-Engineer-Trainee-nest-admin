@@ -55,6 +55,9 @@ let OrderController = class OrderController {
         res.attachment('orders.csv');
         return res.send(csv);
     }
+    async chart() {
+        return this.orderService.chart();
+    }
 };
 __decorate([
     (0, common_1.Get)('orders'),
@@ -70,6 +73,12 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], OrderController.prototype, "export", null);
+__decorate([
+    (0, common_1.Get)('chart'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], OrderController.prototype, "chart", null);
 OrderController = __decorate([
     (0, common_1.UseInterceptors)(common_1.ClassSerializerInterceptor),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),

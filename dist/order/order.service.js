@@ -37,6 +37,14 @@ let OrderService = class OrderService extends abstract_service_1.AbstractService
             meta
         };
     }
+    async chart() {
+        return this.orderRepository.query(`
+            SELECT DATE_FORMAT(o.created_at, '%Y-%m-%d') AS date, sum(i.price * i.quantity) AS sum
+            FROM orders o
+            JOIN order_items i on o.id = i.order_id
+            GROUP BY date;
+            `);
+    }
 };
 OrderService = __decorate([
     (0, common_1.Injectable)(),
