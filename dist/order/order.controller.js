@@ -32,6 +32,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], OrderController.prototype, "all", null);
 OrderController = __decorate([
+    (0, common_1.UseInterceptors)(common_1.ClassSerializerInterceptor),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [order_service_1.OrderService])
