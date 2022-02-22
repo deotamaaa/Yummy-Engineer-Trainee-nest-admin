@@ -32,7 +32,6 @@ import { RoleService } from './role/role.service';
     PermissionModule,
     ProductModule,
     OrderModule,
-    RoleService
   ],
   controllers: [AppController],
   providers: [AppService, {

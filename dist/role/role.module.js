@@ -9,7 +9,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RoleModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const common_module_1 = require("../common/common.module");
 const role_controller_1 = require("./role.controller");
 const role_entity_1 = require("./role.entity");
 const role_service_1 = require("./role.service");
@@ -19,10 +18,10 @@ RoleModule = __decorate([
     (0, common_1.Module)({
         imports: [
             typeorm_1.TypeOrmModule.forFeature([role_entity_1.Role]),
-            common_module_1.CommonModule,
         ],
         controllers: [role_controller_1.RoleController],
-        providers: [role_service_1.RoleService]
+        providers: [role_service_1.RoleService],
+        exports: [role_service_1.RoleService],
     })
 ], RoleModule);
 exports.RoleModule = RoleModule;

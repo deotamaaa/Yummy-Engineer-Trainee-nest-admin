@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RoleController = void 0;
 const common_1 = require("@nestjs/common");
+const has_permission_decorator_1 = require("../permission/has-permission.decorator");
 const role_service_1 = require("./role.service");
 let RoleController = class RoleController {
     constructor(roleService) {
@@ -44,12 +45,14 @@ let RoleController = class RoleController {
 };
 __decorate([
     (0, common_1.Get)(),
+    (0, has_permission_decorator_1.HasPermission)('roles'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], RoleController.prototype, "all", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, has_permission_decorator_1.HasPermission)('roles'),
     __param(0, (0, common_1.Body)('name')),
     __param(1, (0, common_1.Body)('permissions')),
     __metadata("design:type", Function),
@@ -58,6 +61,7 @@ __decorate([
 ], RoleController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(':id'),
+    (0, has_permission_decorator_1.HasPermission)('roles'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
@@ -65,6 +69,7 @@ __decorate([
 ], RoleController.prototype, "get", null);
 __decorate([
     (0, common_1.Put)(':id'),
+    (0, has_permission_decorator_1.HasPermission)('roles'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)('name')),
     __param(2, (0, common_1.Body)('permissions')),
@@ -74,6 +79,7 @@ __decorate([
 ], RoleController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    (0, has_permission_decorator_1.HasPermission)('roles'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),

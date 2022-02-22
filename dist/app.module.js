@@ -20,7 +20,6 @@ const product_module_1 = require("./product/product.module");
 const core_1 = require("@nestjs/core");
 const permission_guard_1 = require("./permission/permission.guard");
 const order_module_1 = require("./order/order.module");
-const role_service_1 = require("./role/role.service");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -43,7 +42,6 @@ AppModule = __decorate([
             permission_module_1.PermissionModule,
             product_module_1.ProductModule,
             order_module_1.OrderModule,
-            role_service_1.RoleService
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService, {

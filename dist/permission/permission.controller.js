@@ -29,7 +29,7 @@ __decorate([
 ], PermissionController.prototype, "all", null);
 PermissionController = __decorate([
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
-    (0, common_1.Controller)('permission'),
+    (0, common_1.Controller)('permissions'),
     __metadata("design:paramtypes", [permission_service_1.PermissionService])
 ], PermissionController);
 exports.PermissionController = PermissionController;
