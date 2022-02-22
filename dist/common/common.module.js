@@ -15,7 +15,7 @@ CommonModule = __decorate([
     (0, common_1.Module)({
         imports: [
             jwt_1.JwtModule.register({
-                secret: 'secret',
+                secret: "secret",
                 signOptions: { expiresIn: '1d' },
             }),
         ],

@@ -17,7 +17,7 @@ let AuthService = class AuthService {
         this.jwtService = jwtService;
     }
     async userId(request) {
-        const cookie = request['jwt'];
+        const cookie = request.cookies['jwt'];
         const data = await this.jwtService.verifyAsync(cookie);
         return data['id'];
     }

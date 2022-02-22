@@ -75,7 +75,6 @@ let UserController = class UserController {
 };
 __decorate([
     (0, common_1.Get)(),
-    (0, has_permission_decorator_1.HasPermission)('users'),
     __param(0, (0, common_1.Query)('page')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -83,7 +82,6 @@ __decorate([
 ], UserController.prototype, "all", null);
 __decorate([
     (0, common_1.Post)(),
-    (0, has_permission_decorator_1.HasPermission)('users'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [user_create_dto_1.UserCreateDto]),
@@ -91,7 +89,6 @@ __decorate([
 ], UserController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    (0, has_permission_decorator_1.HasPermission)('users'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
@@ -116,7 +113,6 @@ __decorate([
 ], UserController.prototype, "updatePassword", null);
 __decorate([
     (0, common_1.Put)(':id'),
-    (0, has_permission_decorator_1.HasPermission)('users'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),

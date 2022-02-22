@@ -20,15 +20,13 @@ export class UserController {
     }
 
     @Get()
-    @HasPermission('users')
+    // @HasPermission('users')
     async all(@Query('page') page = 1) {
         return await this.userService.paginate(page, ['role']);
     }
 
     // Creating users
     @Post()
-    @HasPermission('users')
-
     async create(@Body() body: UserCreateDto): Promise<User> {
         const password = await bcrypt.hash('1234', 12);
 
@@ -42,7 +40,6 @@ export class UserController {
     }
 
     @Get(':id')
-    @HasPermission('users')
     async get(@Param('id') id: number) {
         return this.userService.findOne({ id }, ['role']);
     }
@@ -83,7 +80,6 @@ export class UserController {
 
     // Update Method
     @Put(':id')
-    @HasPermission('users')
     async update(
         @Param('id') id: number,
         @Body() body: UserUpdateDto,
